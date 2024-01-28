@@ -29,21 +29,28 @@ const AuthRootComponent: FC = (): JSX.Element => {
           password,
         };
         const user = await instance.post('auth/login', userData);
-        await dispatch(login(user.data));
-        navigate('/')
+        dispatch(login(user.data));
+        navigate('/');
       } catch (e) {
         return e;
       }
     } else {
       if (password === repeatpassword) {
-        const userData = {
-          firstName,
-          userName,
-          email,
-          password,
-        };
-        const newUser = await instance.post('auth/register', userData);
-        console.log(newUser);
+        try {
+          const userData = {
+            firstName,
+            userName,
+            email,
+            password,
+          };
+          const newUser = await instance.post('auth/register', userData);
+          dispatch(login(newUser.data));
+          navigate('/');
+        } catch (error) {
+          console.log(error);
+          
+          return error
+        }
       } else {
         throw new Error(AppErrors.PasswordDoNotMatch);
       }
