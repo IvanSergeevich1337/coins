@@ -13,28 +13,35 @@ export const useStyles = makeStyles((theme: Theme) => {
     iconBlock: {
       paddingRight: '37px',
       borderRight: `1px solid ${colors.borderColor}`,
-      paddingTop:'10px'
+      paddingTop: '10px',
+    },
+    toolbar: {
+      justifyContent: 'space-between',
+      padding:'20px 40px'
     },
     root: {
-      display: 'flex',
-      justifyContent: 'space-between',
-      alignItems: 'center',
-      padding: '24px 32px',
-      backgroundColor: colors.primary.DEFAULT,
-      maxHeight:'95px',
-      borderBottom:`1px solid ${colors.borderColor}`
+      position: 'static',
+      background: `${colors.primary.DEFAULT}`,
+      borderBottom: `1px solid ${colors.borderColor}`,
+      boxShadow:'none'
     },
     themeIcon: {
       marginRight: '45px',
     },
     searchBlock: {
       display: 'flex',
+      maxHeight:'45px',
       borderRadius: '8px',
       marginLeft: '28px',
-      backgroundColor: `${colors.primary[600]}`
+      backgroundColor: `${colors.primary[600]}`,
     },
     searchInput: {
       padding: '12px 18px',
     },
+    menuIcon: {
+      marginRight:'10px',
+      cursor:'pointer',
+      
+    }
   };
 });
