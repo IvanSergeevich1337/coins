@@ -2,12 +2,13 @@ import React, { FC, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import LoginPage from './login';
 import RegisterPage from './register';
-import './style.scss';
 import { Box } from '@mui/material';
 import { instance } from '../utils/axios';
 import { useAppDispatch } from '../utils/hooks';
 import { login } from '../../store/slices/auth';
 import { AppErrors } from '../../common/errors';
+import './style.scss';
+import { useForm } from 'react-hook-form';
 
 const AuthRootComponent: FC = (): JSX.Element => {
   const [email, setEmail] = useState('');
@@ -19,14 +20,22 @@ const AuthRootComponent: FC = (): JSX.Element => {
   const location = useLocation();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm();
+  console.log("errors",errors);
+  
 
-  const handleSubmit = async (e: any) => {
-    e.preventDefault();
+  const handleSubmitForm = async (data: any) => {
+    console.log('data',data);
+    
     if (location.pathname === '/login') {
       try {
         const userData = {
-          email,
-          password,
+          email: data.email,
+          password: data.password,
         };
         const user = await instance.post('auth/login', userData);
         dispatch(login(user.data));
@@ -48,8 +57,8 @@ const AuthRootComponent: FC = (): JSX.Element => {
           navigate('/');
         } catch (error) {
           console.log(error);
-          
-          return error
+
+          return error;
         }
       } else {
         throw new Error(AppErrors.PasswordDoNotMatch);
@@ -59,7 +68,7 @@ const AuthRootComponent: FC = (): JSX.Element => {
 
   return (
     <div className="root">
-      <form className="form" onSubmit={handleSubmit}>
+      <form className="form" onSubmit={handleSubmit(handleSubmitForm)}>
         <Box
           display="flex"
           justifyContent="center"
@@ -72,7 +81,7 @@ const AuthRootComponent: FC = (): JSX.Element => {
           boxShadow={'5px 5px 10px #ccc'}
         >
           {location.pathname === '/login' ? (
-            <LoginPage setEmail={setEmail} setPassword={setPassword} navigate={navigate} />
+            <LoginPage navigate={navigate} register={register} errors={errors} />
           ) : location.pathname === '/register' ? (
             <RegisterPage
               setEmail={setEmail}
