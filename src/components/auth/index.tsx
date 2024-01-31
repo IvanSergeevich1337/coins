@@ -1,29 +1,27 @@
-import React, { FC } from 'react';
+import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import LoginPage from './login';
 import RegisterPage from './register';
-import { Box } from '@mui/material';
-import { instance } from '../utils/axios';
-import { useAppDispatch } from '../utils/hooks';
-import { login } from '../../store/slices/auth';
-import { AppErrors } from '../../common/errors';
 import './style.scss';
+import { Box } from '@mui/material';
+import { instance } from '../../utils/axios';
+import { useAppDispatch } from '../../utils/hook';
+import { login } from '../../store/slice/auth';
+import { AppErrors } from '../../common/errors';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { LoginSchema } from '../utils/yup';
+import { LoginSchema, RegisterSchema } from '../../utils/yup';
 
-const AuthRootComponent: FC = (): JSX.Element => {
+const AuthRootComponent: React.FC = (): JSX.Element => {
   const location = useLocation();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm({
-    mode: 'onSubmit',
-    resolver: yupResolver(LoginSchema),
+    resolver: yupResolver(location.pathname === '/login' ? LoginSchema : RegisterSchema),
   });
 
   const handleSubmitForm = async (data: any) => {
@@ -44,17 +42,16 @@ const AuthRootComponent: FC = (): JSX.Element => {
         try {
           const userData = {
             firstName: data.name,
-            userName: data.username,
+            username: data.username,
             email: data.email,
             password: data.password,
           };
           const newUser = await instance.post('auth/register', userData);
           dispatch(login(newUser.data));
           navigate('/');
-        } catch (error) {
-          console.log(error);
-
-          return error;
+        } catch (e) {
+          console.log(e);
+          return e;
         }
       } else {
         throw new Error(AppErrors.PasswordDoNotMatch);
