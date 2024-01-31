@@ -1,11 +1,11 @@
-import { Box } from '@mui/material'
-import { styled } from '@mui/styles'
-import React from 'react'
+import React from 'react';
+import {styled} from "@mui/styles";
+import {Box} from "@mui/material";
 
-const FlexBetween = styled(Box) ({
-  display:'flex',
-  justidyContent:'space-between',
-  alignItems:'center'
+const FlexBetween = styled(Box)({
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center'
 })
 
-export default FlexBetween
+export default FlexBetween;
