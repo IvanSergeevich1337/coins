@@ -21,11 +21,7 @@ const LoginPage: FC<IPropsLogin> = (props: IPropsLogin): JSX.Element => {
         label="Email"
         variant="outlined"
         placeholder="Введите ваш email"
-        {...register('email', {
-          required: 'Это поле обязательно для заполнения',
-          pattern:
-            /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/,
-        })}
+        {...register('email')}
       />
       <TextField
         error={!!errors.password}
@@ -36,10 +32,7 @@ const LoginPage: FC<IPropsLogin> = (props: IPropsLogin): JSX.Element => {
         label="Password"
         variant="outlined"
         placeholder="Введите ваш пароль"
-        {...register('password', {
-          required: 'Это поле обязательно для заполнения',
-          minLength: 6,
-        })}
+        {...register('password')}
       />
       <Button
         sx={{ fontFamily: 'Poppins', marginTop: 2, width: '60%', marginBottom: 2 }}

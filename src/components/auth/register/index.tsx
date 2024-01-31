@@ -3,7 +3,7 @@ import React, { FC } from 'react';
 import { IPropsRegister } from '../../../common/types/auth';
 
 const RegisterPage: FC<IPropsRegister> = (props: IPropsRegister): JSX.Element => {
-  const { setEmail, setPassword, setUserName, setRepeatPassword, setFirstName, navigate } = props;
+  const { navigate, errors, register } = props;
 
   return (
     <>
@@ -14,46 +14,56 @@ const RegisterPage: FC<IPropsRegister> = (props: IPropsRegister): JSX.Element =>
         Введите данные для регистрации
       </Typography>
       <TextField
+        error={!!errors.name}
+        helperText={errors.name ? `${errors.name.message}` : ''}
         fullWidth={true}
         margin="normal"
         label="Имя"
         variant="outlined"
         placeholder="Введите ваше Имя"
-        onChange={(e) => setFirstName(e.target.value)}
+        {...register('name')}
       />
       <TextField
+        error={!!errors.username}
+        helperText={errors.username ? `${errors.username.message}` : ''}
         fullWidth={true}
         margin="normal"
         label="Username"
         variant="outlined"
         placeholder="Введите ваш username"
-        onChange={(e) => setUserName(e.target.value)}
+        {...register('username')}
       />
       <TextField
+        error={!!errors.email}
+        helperText={errors.email ? `${errors.email.message}` : ''}
         fullWidth={true}
         margin="normal"
         label="Email"
         variant="outlined"
         placeholder="Введите ваш email"
-        onChange={(e) => setEmail(e.target.value)}
+        {...register('email')}
       />
       <TextField
+        error={!!errors.password}
+        helperText={errors.password ? `${errors.password.message}` : ''}
         fullWidth={true}
         type="password"
         margin="normal"
         label="Password"
         variant="outlined"
         placeholder="Введите ваш пароль"
-        onChange={(e) => setPassword(e.target.value)}
+        {...register('password')}
       />
       <TextField
+        error={!!errors.confirmPassword}
+        helperText={errors.confirmPassword ? `${errors.confirmPassword.message}` : ''}
         fullWidth={true}
         type="password"
         margin="normal"
         label="Password"
         variant="outlined"
         placeholder="Повторите ваш пароль"
-        onChange={(e) => setRepeatPassword(e.target.value)}
+        {...register('confirmPassword')}
       />
       <Button
         sx={{ fontFamily: 'Poppins', marginTop: 2, width: '60%', marginBottom: 2 }}

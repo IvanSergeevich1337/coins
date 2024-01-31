@@ -1,18 +1,15 @@
 import { FieldErrors, FieldValues, UseFormRegister } from 'react-hook-form';
 
 export interface IPropsLogin<TFieldValues extends FieldValues = FieldValues, TContext = any> {
-  navigate: (value: string) => void;
-  register: UseFormRegister<TFieldValues>;
+  navigate: (to: string) => void;
+  register: UseFormRegister<TFieldValues | any>;
   errors: FieldErrors<TFieldValues>;
 }
 
-export interface IPropsRegister {
-  setEmail: (value: string) => void;
-  setPassword: (value: string) => void;
-  setRepeatPassword: (value: string) => void;
-  setFirstName: (value: string) => void;
-  setUserName: (to: string) => void;
+export interface IPropsRegister<TFieldValues extends FieldValues = FieldValues, TContext = any> {
   navigate: (value: string) => void;
+  register: UseFormRegister<TFieldValues | any>;
+  errors: FieldErrors<TFieldValues>;
 }
 
 export interface IAuthState {
@@ -21,19 +18,19 @@ export interface IAuthState {
 }
 
 interface IPublicUser {
-  id: number | null;
-  firstName: string;
-  userName: string;
-  email: string;
-  createdAt: string;
-  updatedAt: string;
-  watchList: [IWatchList];
+  id: number | null,
+  firstName: string,
+  username: string,
+  email: string,
+  createdAt: string,
+  updatedAt: string
+  watchlist:[IWatchlist]
 }
-interface IWatchList {
-  id: number | null;
-  name: string;
-  assetId: string;
-  createdAt: string;
-  updatedAt: string;
-  user: number | null;
+interface IWatchlist {
+  id: number | null,
+  name: string,
+  assetId: string,
+  createdAt: string,
+  updatedAt: string,
+  user: number | null
 }

@@ -5,11 +5,11 @@ const initialState: IAuthState = {
   user: {
     id: null,
     firstName: '',
-    userName: '',
+    username: '',
     email: '',
     createdAt: '',
     updatedAt: '',
-    watchList: [
+    watchlist: [
       {
         id: null,
         name: '',
