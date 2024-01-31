@@ -5,7 +5,7 @@ export interface IPropsLogin<
     TContext = any,
     > {
     navigate: (to: string) => void
-    register: UseFormRegister<TFieldValues>
+    register: UseFormRegister<TFieldValues| any>
     errors: FieldErrors<TFieldValues>
 }
 
@@ -14,7 +14,7 @@ export interface IPropsRegister<
     TContext = any,
     > {
     navigate: (to: string) => void
-    register: UseFormRegister<TFieldValues>
+    register: UseFormRegister<TFieldValues | any>
     errors: FieldErrors<TFieldValues>
 }
 
