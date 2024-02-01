@@ -1,11 +1,11 @@
 import React from 'react';
-import { Box, Button, TextField, Typography } from '@mui/material';
+import { Box, TextField, Typography } from '@mui/material';
 import { IPropsRegister } from '../../../../common/types/auth';
 import { useStyles } from './styles';
-import AppButton from '../../../app-button';
+import AppLoadingButton from '../../../loading-button';
 
 const RegisterPage: React.FC<IPropsRegister> = (props: IPropsRegister): JSX.Element => {
-  const { navigate, register, errors } = props;
+  const { navigate, register, errors, loading } = props;
   const classes = useStyles();
   return (
     <>
@@ -15,7 +15,7 @@ const RegisterPage: React.FC<IPropsRegister> = (props: IPropsRegister): JSX.Elem
       <Typography variant="body1" marginBottom={3} textAlign="center">
         Введите данные для регистрации
       </Typography>
-      <Box marginBottom='20px'>
+      <Box marginBottom="20px">
         <TextField
           error={!!errors.name}
           fullWidth={true}
@@ -69,9 +69,9 @@ const RegisterPage: React.FC<IPropsRegister> = (props: IPropsRegister): JSX.Elem
           {...register('confirmPassword')}
         />
       </Box>
-      <AppButton type="submit" variant="contained">
+      <AppLoadingButton loading={loading} type="submit" variant="contained">
         Регистрация
-      </AppButton>
+      </AppLoadingButton>
       <Box margin="20px 0">
         <Typography variant="body1">
           У вас уже есть аккаунт?
