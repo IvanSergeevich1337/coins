@@ -1,11 +1,12 @@
-import React, { useCallback, useEffect, useMemo, useRef } from 'react';
+import React, { FC, useCallback, useEffect, useMemo, useRef } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../utils/hook';
 import { getFavoriteAssets } from '../../../store/thunks/assets';
 import { Box, Grid } from '@mui/material';
 import { useStyles } from './style';
 import { clearFavoriteAssets } from '../../../store/slice/assets';
+import TestGraph from '../../charts/test';
 
-const Home = () => {
+const Home: FC = (): JSX.Element => {
   const favoriteAssets: any[] = useAppSelector((state) => state.assets.favoriteAssets);
   const dispatch = useAppDispatch();
   const classes = useStyles();
@@ -32,8 +33,10 @@ const Home = () => {
   }, [favouriteAssetName, fetchData, dispatch]);
 
   const renderFavoriteGraph = favoriteAssets.map((item: any) => {
+    console.log('item', item);
     const currentPrice = item.data.prices[0];
     const currentCap = item.data.market_caps[0];
+
     return (
       <Grid key={item.name} item xs={12} sm={6} lg={6}>
         <Grid container className={classes.topCardItem}>
@@ -45,7 +48,7 @@ const Home = () => {
             </div>
           </Grid>
           <Grid item xs={12} sm={6} lg={6}>
-            <h5>Chart</h5>
+            <TestGraph data={item.data.prices} />
           </Grid>
         </Grid>
       </Grid>
