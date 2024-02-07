@@ -27,27 +27,18 @@ export const useStyles = makeStyles((theme: Theme) => {
       height: '100%',
       flexDirection: 'column',
       justifyContent: 'flex-end',
-      paddingBottom: '35px',
+      paddingBottom: '20px',
     },
     cardPrice: {
       fontSize: 32,
       fontWeight: 700,
       lineHeight: '48px',
     },
-    priceTrend: {
-      width: '20%',
-      display: 'flex',
-      alignItems: 'center',
-      padding: '2px',
-      borderRadius: 4,
-    },
-    trendUp: {
-      backgroundColor: '#A9FFA7',
-      color: '#037400',
-    },
-    trendDown: {
-      backgroundColor: '#FFA7A7',
-      color: '#740000',
+    cardCapitalize: {
+      color: `${colors.secondary.DEFAULT}`,
+      fontWeight: 400,
+      fontSize: 18,
+      lineHeight: '21px',
     },
   };
 });
